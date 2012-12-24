@@ -8,15 +8,18 @@ from random import randint
 
 def empty(request): return HttpResponse("")
 
+# The public view of a thing that anyone can access
 def thing(request, thing_id):
 	t = Thing.objects.get(pk=thing_id)
 	return render_to_response("thing/thing.html", RequestContext(request, { 't': t, }))
 
+# The private view of a thing which can only be accessed by those who scan the tag
 def thing_private(request, private_id, scan_id):
 	t = Tag.objects.get(private_id=private_id)
 	sf = ScanForm()
 	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id }))
 
+# Tag creation view
 def tag(request):
 	tags = []
 	for _ in range(0, 6):
@@ -35,6 +38,7 @@ def tag(request):
 
 	return render_to_response("thing/tag.html", { 'tags': tags, })
 
+# Thing creation view
 def create_thing(request):
 	private_id = None
 	if request.method == "POST":
@@ -52,13 +56,13 @@ def create_thing(request):
 			private_id = request.GET["id"]
 		form = ThingForm()
 	return render_to_response('thing/create.html', { 'form': form, 'private_id': private_id, }, context_instance=RequestContext(request))
-	#return render_to_response('thing/create.html', { 'form': form, })
 
 # Creates the page that grabs location from the browser and redirects to the appropriate
 # URL to create a scan of the thing.
 def location(request, thing_id):
 	return render_to_response("thing/location.html", RequestContext(request, { 'thing_id': thing_id, }))
 
+# Scan creation view -- calledd whenever a thing is scanned
 def scan(request):
 	t = Tag.objects.get(private_id=request.POST['id'])
 
@@ -74,8 +78,8 @@ def scan(request):
 	sc.save()
 
 	return HttpResponseRedirect("/thing/thingpr/%d/%d" % (th.tag.private_id, sc.pk))
-	#return HttpResponse("creating scan for thing #%s at %s, %s" % (request.POST['id'], request.POST['lat'], request.POST['long']))
 
+# Scan update view -- called when a user adds a comment and/or photo
 def scan_update(request):
 	sc = Scan.objects.get(pk=request.POST['scan_id'])
 	sc.body = request.POST['body']
