@@ -1,0 +1,11 @@
+<form action="/thing/create" enctype="multipart/form-data" method="POST">
+	{% csrf_token %}
+	{% if private_id %}
+		<input id="id_private_id" type="hidden" name="private_id" value="{{ private_id }}"/>
+	{% else %}
+		<p><label for="id_private_id">Private ID:</label>
+		<input id="id_private_id" type="text" name="private_id" maxlength="9" /></p>
+	{% endif %}
+	{{ form.as_p }}
+<input type="submit" value="Submit"/>
+</form>

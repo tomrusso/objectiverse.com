@@ -1,0 +1,17 @@
+<html>
+	<head><title>Object Tags</title></head>
+	<body style="margin:0px; text-align:center;">
+<table style="width:100%; border-collapse:collapse;">
+	{% for row in tags %}
+		<tr>
+		{% for item in row %}
+			<!--<td style="border:1px solid black; padding-top:2.5mm; padding-left:2.5mm; padding-bottom:7.5mm; padding-right:14.5mm;">-->
+			<td style="vertical-align:center; text-align:center; padding-bottom:1.55mm;">
+				<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://www.objectiverse.com/{{ item.private_id }}">
+			</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+</table>
+	</body>
+</html>

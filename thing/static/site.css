@@ -1,0 +1,64 @@
+body
+{
+	margin: 0px;
+	font-family: arial, sans-serif;
+}
+
+.header
+{
+	margin: 0px;
+	color:white;
+	background-color:#489CDF;
+	padding: 10px;
+	font-size: 30px;
+}
+
+.content
+{
+	margin: 0px auto;
+	padding: 10px;
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	width:700px;
+}
+
+.comments
+{
+	/* list-style-type: none; */
+	padding-left: 0px;
+	margin-left: 30px;
+}
+
+.comments .comment 
+{
+	border-top: 1px solid #cccccc;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	padding-right: 100px;
+	font-size: 11pt;
+}
+
+.commentHeader
+{
+	font-weight: bold;
+	padding-bottom: 5px;
+	color: #25587E;
+	vertical-align: top;
+}
+
+.photoComment
+{
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+.thingLabel
+{
+	font-weight: bold;
+	color: #25587E;
+}
+
+#id_body
+{
+	width: 100%;
+}

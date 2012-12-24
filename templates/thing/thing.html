@@ -1,0 +1,105 @@
+{% extends "thing/template.html" %}
+
+{% block content %}
+<table>
+	<tr>
+		<td><img src="/{{ t.photo }}" width="300"></td>
+		<td style="vertical-align:top; padding-left:10px;">
+			<table>
+				<tr>
+					<td class="thingLabel">
+						Description:
+					</td>
+					<td>
+						{{ t.description }}
+					</td>
+				</tr>
+				<tr>
+					<td class="thingLabel">Created on:</td>
+					<td>{{ t.timestamp|date:"F j, Y" }}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+{% if scan_id %}
+<form method="POST" action="/thing/scan_update" enctype="multipart/form-data">
+	{% csrf_token %}
+	<input type="hidden" name="scan_id" value="{{ scan_id }}"/>
+	<table>
+		<tr>
+			<td colspan="2">
+				Add a comment:<br>
+				{{ sf.body }}
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td>Attach a photo: {{ sf.photo }}</td>
+			<td style="text-align:right;"><input type="submit" value="Submit"/></td>
+		</tr>
+	</table>
+</form>
+<br>
+{% endif %}
+<div class="comments">
+	{% for scan in t.scan_set.all %}
+		<div class="comment">
+			{% if scan.photo %}
+				<table>
+					<tr>
+						<td style="vertical-align:top;">
+							<img src="/{{ scan.photo }}" width="100">
+						</td>
+						<td class="photoComment">
+							<div class="commentHeader">
+								Photo posted on {{ scan.timestamp|date:"F j" }} at {{ scan.timestamp|date:"f a"}}
+							</div>
+							{% if scan.body %}
+								{{ scan.body }}
+							{% endif %}
+						</td>
+					</tr>
+				</table>
+			{% elif scan.body %}
+				<div class="commentHeader">
+					Comment posted on {{ scan.timestamp|date:"F j" }} at {{ scan.timestamp|date:"f a"}}
+				</div>
+				{{ scan.body }}
+			{% else %}
+				<div class="commentHeader">
+					Scanned on {{ scan.timestamp|date:"F j" }} at {{ scan.timestamp|date:"f a"}}
+				</div>
+			{% endif %}
+			{% comment %}
+				<div>
+					{{ scan.latitude }},{{ scan.longitude }} at {{ scan.timestamp }}
+					<br>
+					{{ scan.body }}
+				</div>
+			{% endcomment %}
+		</div>
+	{% endfor %}
+	{% for comment in t.comment_set.all %}
+		<li>{{ comment.body }} by {{ comment.user }}</li>
+	{% endfor %}
+</div>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+			<br><br><br><br>
+{% endblock content %}

@@ -1,0 +1,10 @@
+<h1>Thing #{{ t.pk }}</h1>
+Description: {{ t.description }}
+<br>
+<img src="/{{ t.photo }}">
+<br>
+<ul>
+	{% for comment in t.comment_set.all %}
+		<li>{{ comment.body }} by {{ comment.user }}</li>
+	{% endfor %}
+</ul>
