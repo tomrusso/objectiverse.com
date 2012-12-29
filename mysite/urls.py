@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^photos/(?P<path>.*)$', django.views.static.serve, { 'document_root': '/Users/tom/Documents/code/django/mysite/photos', }),
 	url(r'^(?P<thing_id>\d+)$', 'thing.views.location'),
+	url(r'^$', 'thing.views.all'),
 )
 
 #urlpatterns = patterns('',

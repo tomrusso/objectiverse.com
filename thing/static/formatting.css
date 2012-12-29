@@ -1,37 +1,88 @@
 body
 {
-	background:#fff;
+	background: #fff;
+	font-family: helvetica,arial,sans-serif;
 }
 
 /* Header formatting */
 #header
 {
-	border-bottom:1px solid #000;
+	/* border-bottom: 1px solid #000; */
+	background-color:#489CDF;
+	margin: 0px;
+}
+
+#header h1
+{
+	font-size: 30px;
+	font-weight: normal;
+	color:white;
+	margin: 10px 0 10px 0;
+	padding: 0px;
 }
 
 /* Footer formatting */
 #footer
 {
-	border-top:1px solid #000;
+	border-top: 1px solid #000;
+	padding-top: 5px;
+	padding-bottom: 5px; 
+	font-size: 10pt;
+	text-align: center;
 }
 
 .col1, .col2, .col3
 {
-	padding-top: 0;
+	padding-top: 1em;
 	padding-bottom: 0;
 }
 
 .threecol
 {
-	background:#eee;		/* right column background colour */
+	background: #eee;		/* right column background colour */
 }
 
 .threecol .colmid
 {
-	background:#fff;		/* center column background colour */
+	background: white;		/* center column background colour */
 }
 
 .threecol .colleft
 {
-	background:#f4f4f4;		/* left column background colour */
+	background: #eee;		/* left column background colour */
+}
+
+.comments
+{
+	padding-left: 0px;
+	margin-left: 30px;
+}
+
+.comments .comment 
+{
+	border-top: 1px solid #cccccc;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	padding-right: 100px;
+	font-size: 11pt;
+}
+
+.commentHeader
+{
+	font-weight: bold;
+	padding-bottom: 5px;
+	color: #25587E;
+	vertical-align: top;
+}
+
+.photoComment
+{
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+.thingLabel
+{
+	font-weight: bold;
+	color: #25587E;
 }

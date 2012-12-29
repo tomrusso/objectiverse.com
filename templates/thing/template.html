@@ -1,14 +1,53 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-	<head>
-		<title>objectiverse.com</title>
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}site.css"/>
-	</head>
-	<body>
-		<div class="header">objectiverse</div>
-		<div class="content">
-			{% block content %}
-			{% endblock content %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+	<title>{% block title %}objectiverse.com{% endblock title %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}three_col.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}formatting.css" media="screen" />
+</head>
+<body>
+
+<div id="header">
+	<h1>objectiverse</h1>
+</div>
+<div class="colmask threecol">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1">
+				<!-- Column 1 start -->
+				{% block content %}
+				{% endblock content %}
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2">
+				<!-- Column 2 start -->
+				<ul style="list-style:none; padding:0; margin:0;">
+					<li><a href="/">Home</a></li>
+					<li><a href="/thing/search">Search</a></li>
+					<li><a href="/thing/maps">Maps</a></li>
+					<li><a href="/thing/tag">Tags</a></li>
+				</ul>
+				<!-- Column 2 end -->
+			</div>
+			<div class="col3">
+				<!-- Column 3 start -->
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<br><br><br><br>
+				<!-- Column 3 end -->
+			</div>
 		</div>
-	</body>
+	</div>
+</div>
+<div id="footer">
+	All content &copy; 2012, objectiverse.com
+</div>
+</body>
 </html>

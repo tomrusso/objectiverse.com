@@ -44,7 +44,7 @@
 <br>
 {% endif %}
 <div class="comments">
-	{% for scan in t.scan_set.all %}
+	{% for scan in scans %}
 		<div class="comment">
 			{% if scan.photo %}
 				<table>
@@ -81,25 +81,18 @@
 			{% endcomment %}
 		</div>
 	{% endfor %}
+	{% if scans.has_previous %}
+		<div style="float: left;">
+			<a href="{{ t.pk }}?page={{ scans.previous_page_number }}">&lt;&lt; previous</a>
+		</div>
+	{% endif %}
+	{% if scans.has_next %}
+		<div style="float: right;">
+			<a href="{{ t.pk }}?page={{ scans.next_page_number }}">next &gt;&gt;</a>
+		</div>
+	{% endif %}
 	{% for comment in t.comment_set.all %}
 		<li>{{ comment.body }} by {{ comment.user }}</li>
 	{% endfor %}
 </div>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
-			<br><br><br><br>
 {% endblock content %}

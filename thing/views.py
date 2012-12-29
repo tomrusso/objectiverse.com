@@ -5,19 +5,43 @@ from django.template import RequestContext
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from random import randint
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def empty(request): return HttpResponse("")
+def all(request):
+	recent_things = paginate(Thing.objects.all().order_by("-timestamp"), 20, request)
+	return render_to_response("thing/results.html", RequestContext(request, { 'recent_things': recent_things, }))
 
 # The public view of a thing that anyone can access
 def thing(request, thing_id):
 	t = Thing.objects.get(pk=thing_id)
-	return render_to_response("thing/thing.html", RequestContext(request, { 't': t, }))
+	# TODO: At some point should make things per page a constant, see thing_private view below 
+	scans = paginate(t.scan_set.all().order_by("-timestamp"), 20, request)
+	return render_to_response("thing/thing.html", RequestContext(request, { 't': t, 'scans': scans, }))
 
 # The private view of a thing which can only be accessed by those who scan the tag
 def thing_private(request, private_id, scan_id):
 	t = Tag.objects.get(private_id=private_id)
+	# TODO: At some point should make things per page a constant, see thing view above
+	scans = paginate(t.scan_set.all().order_by("-timestamp"), 20, request)
 	sf = ScanForm()
-	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id }))
+	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id, 'scans': scans }))
+
+# Get a paginated list of objects
+def paginate(objects, num_per_page, request):
+	paginator = Paginator(objects, num_per_page)
+
+	page = request.GET.get('page')
+	try:
+		# Deliver the requested page
+		paged_objects = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is missing or not an integer, show the first page
+		paged_objects = paginator.page(1)
+	except EmptyPage:
+		# If the page is out of range, show the last page
+		paged_objects = paginator.page(paginator.num_pages)
+
+	return paged_objects
 
 # Tag creation view
 def tag(request):
