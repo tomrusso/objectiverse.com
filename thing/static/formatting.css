@@ -1,0 +1,37 @@
+body
+{
+	background:#fff;
+}
+
+/* Header formatting */
+#header
+{
+	border-bottom:1px solid #000;
+}
+
+/* Footer formatting */
+#footer
+{
+	border-top:1px solid #000;
+}
+
+.col1, .col2, .col3
+{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.threecol
+{
+	background:#eee;		/* right column background colour */
+}
+
+.threecol .colmid
+{
+	background:#fff;		/* center column background colour */
+}
+
+.threecol .colleft
+{
+	background:#f4f4f4;		/* left column background colour */
+}

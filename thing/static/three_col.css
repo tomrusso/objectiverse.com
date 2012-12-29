@@ -1,0 +1,90 @@
+body
+{
+	margin:0;
+	padding:0;
+	border:0;				/* This removes the border around the viewport in old versions of IE */
+	width:100%;
+	min-width:600px;		/* Minimum width of layout - remove line if not required */
+							/* The min-width property does not work in old versions of Internet Explorer */
+}
+
+/* Header styles */
+#header
+{
+	clear:both;
+	float:left;
+	width:96%;				/* 100% - (header padding left + header padding right) */
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+/* Footer styles */
+#footer
+{
+	clear:both;
+	float:left;
+	width:96%;				/* 100% - (footer padding-left + footer padding-right) */
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+/* column container */
+.colmask
+{
+	position:relative;		/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+}
+
+/* common column settings */
+.colright,
+.colmid,
+.colleft
+{
+	float:left;
+	width:100%;			/* width of page */
+	position:relative;
+}
+
+.col1,
+.col2,
+.col3
+{
+	float:left;
+	position:relative;
+	overflow:hidden;
+}
+
+/* 3 Column settings */
+.threecol .colmid
+{
+	right:20%;				/* width of the right column */
+}
+
+.threecol .colleft
+{
+	right:60%;				/* width of the middle column */
+}
+
+.threecol .col1
+{
+	width:56%;				/* width of center column content (column width minus padding on either side) */
+	left:102%;				/* 100% plus left padding of center column */
+}
+
+.threecol .col2
+{
+	width:16%;				/* Width of left column content (column width minus padding on either side) */
+	left:26%;				/* width of (right column) plus (center column left and right padding) plus */
+							/* (left column left padding) */
+}
+
+.threecol .col3
+{
+	width:16%;				/* Width of right column content (column width minus padding on either side) */
+	left:90%;				/* Please make note of the brackets here: */
+							/* (100% - left column width) plus (center column left and right padding) plus */
+							/* (left column left and right padding) plus (right column left padding) */
+}
