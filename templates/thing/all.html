@@ -1,7 +1,7 @@
 {% extends "thing/template.html" %}
 
 {% block content %}
-	{% for thing in recent_things %}
+	{% for thing in thing_set %}
 		<hr/>
 		<table>
 			<tr>
@@ -28,14 +28,14 @@
 		</table>
 	{% endfor %}
 	<hr/>
-	{% if recent_things.has_previous %}
+	{% if thing_set.has_previous %}
 		<div style="float: left;">
-			<a href="?page={{ recent_things.previous_page_number }}">&lt;&lt; previous</a>
+			<a href="?page={{ thing_set.previous_page_number }}">&lt;&lt; previous</a>
 		</div>
 	{% endif %}
-	{% if recent_things.has_next %}
+	{% if thing_set.has_next %}
 		<div style="float: right;">
-			<a href="?page={{ recent_things.next_page_number }}">next &gt;&gt;</a>
+			<a href="?page={{ thing_set.next_page_number }}">next &gt;&gt;</a>
 		</div>
 	{% endif %}
 {% endblock content %}
