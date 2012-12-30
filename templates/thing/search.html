@@ -1,0 +1,48 @@
+{% extends "thing/results.html" %}
+
+{% block content %}
+	{% if thing_set %}
+		Results for "{{ query }}"
+		<br/>
+		{% for thing in thing_set %}
+			<hr/>
+			<table>
+				<tr>
+					<td>
+						<a href="/thing/thing/{{ thing.pk }}"><img src="/{{ thing.photo }}" width="150"></a>
+					</td>
+					<td style="vertical-align:top; padding-left:10px;">
+						<table>
+							<tr>
+								<td class="thingLabel">
+									Description:
+								</td>
+								<td>
+									{{ thing.description }}
+								</td>
+							</tr>
+							<tr>
+								<td class="thingLabel">Created on:</td>
+								<td>{{ thing.timestamp|date:"F j, Y" }}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		{% endfor %}
+		<hr/>
+		{% if thing_set.has_previous %}
+			<div style="float: left;">
+				<a href="?page={{ thing_set.previous_page_number }}&query={{ query }}">&lt;&lt; previous</a>
+			</div>
+		{% endif %}
+		{% if thing_set.has_next %}
+			<div style="float: right;">
+				<a href="?page={{ thing_set.next_page_number }}&query={{ query }}">next &gt;&gt;</a>
+			</div>
+		{% endif %}
+	{% else %}
+		<br/>
+		Zero results for "{{ query }}"
+	{% endif %}
+{% endblock content %}
