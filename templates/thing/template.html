@@ -4,11 +4,19 @@
 	<title>{% block title %}objectiverse.com{% endblock title %}</title>
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}three_col.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}formatting.css" media="screen" />
+	{% block head %}{% endblock head %}
 </head>
-<body>
+<body {% block bodytag %}{% endblock bodytag %}>
 
 <div id="header">
-	<h1>objectiverse</h1>
+	<h1 style="float: left;">objectiverse</h1>
+	<div style="float: right; padding-top: 1em;">
+		<form method="POST" action="/thing/search">
+			{% csrf_token %}
+			<input type="text" name="query"/>
+			<input type="submit" value="Search"/>
+		</form>
+	</div>	
 </div>
 <div class="colmask threecol">
 	<div class="colmid">
@@ -23,7 +31,6 @@
 				<!-- Column 2 start -->
 				<ul style="list-style:none; padding:0; margin:0;">
 					<li><a href="/">Home</a></li>
-					<li><a href="/thing/search">Search</a></li>
 					<li><a href="/thing/maps">Maps</a></li>
 					<li><a href="/thing/tag">Tags</a></li>
 				</ul>

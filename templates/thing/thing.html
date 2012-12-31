@@ -3,16 +3,12 @@
 {% block content %}
 <table>
 	<tr>
-		<td><img src="/{{ t.photo }}" width="300"></td>
+		<td rowspan="2"><img src="/{{ t.photo }}" width="300"></td>
 		<td style="vertical-align:top; padding-left:10px;">
 			<table>
 				<tr>
-					<td class="thingLabel">
-						Description:
-					</td>
-					<td>
-						{{ t.description }}
-					</td>
+					<td class="thingLabel">Description:</td>
+					<td>{{ t.description }}</td>
 				</tr>
 				<tr>
 					<td class="thingLabel">Created on:</td>
@@ -21,6 +17,7 @@
 			</table>
 		</td>
 	</tr>
+	<tr><td style="vertical-align: bottom; padding-left: 10px;"><a href="/thing/maps/?id={{ t.pk }}">Map view</a></td></tr>
 </table>
 <br>
 {% if scan_id %}

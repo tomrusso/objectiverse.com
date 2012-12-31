@@ -7,4 +7,7 @@ urlpatterns = patterns('thing.views',
 	url(r'^create$', 'create_thing'),
 	url(r'^scan$', 'scan'),
 	url(r'^scan_update$', 'scan_update'),
+	url(r'^search', 'search'),
+	url(r'^maps$', 'map'),
+	url(r'^coords', 'coords'),
 )

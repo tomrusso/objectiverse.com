@@ -7,10 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from random import randint
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def all(request):
-	recent_things = paginate(Thing.objects.all().order_by("-timestamp"), 20, request)
-	return render_to_response("thing/results.html", RequestContext(request, { 'recent_things': recent_things, }))
-
 # The public view of a thing that anyone can access
 def thing(request, thing_id):
 	t = Thing.objects.get(pk=thing_id)
@@ -25,6 +21,38 @@ def thing_private(request, private_id, scan_id):
 	scans = paginate(t.scan_set.all().order_by("-timestamp"), 20, request)
 	sf = ScanForm()
 	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id, 'scans': scans }))
+
+def all(request):
+	recent_things = paginate(Thing.objects.all().order_by("-timestamp"), 20, request)
+	return render_to_response("thing/all.html", RequestContext(request, { 'thing_set': recent_things, }))
+
+def search(request):
+	query = request.REQUEST['query']
+	things = paginate(Thing.objects.filter(description__contains=query), 20, request)
+
+	return render_to_response("thing/search.html", RequestContext(request, { 'thing_set': things, 'query': query, }))
+
+def map(request):
+	if request.REQUEST.has_key('id'):
+		t = Thing.objects.get(pk=int(request.REQUEST['id']))
+		return render_to_response("thing/map.html", RequestContext(request, { 't': t, }))
+	else:
+		return render_to_response("thing/map.html", RequestContext(request, { }))
+
+def coords(request):
+	if request.REQUEST.has_key('id'):
+		scans = Scan.objects.filter	(	thing__pk=int(request.REQUEST['id']),
+										latitude__isnull=False, 
+										longitude__isnull=False
+									).order_by("-timestamp")[:20]
+	else:
+		scans = Scan.objects.filter(latitude__isnull=False, longitude__isnull=False).order_by("-timestamp")[:20]
+
+	response = "["
+	for scan in scans:
+		response += "{ lat: %f, long: %f }, " % (scan.latitude, scan.longitude)
+	response += "]"
+	return HttpResponse(response)
 
 # Get a paginated list of objects
 def paginate(objects, num_per_page, request):
