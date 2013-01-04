@@ -22,16 +22,20 @@ def thing_private(request, private_id, scan_id):
 	sf = ScanForm()
 	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id, 'scans': scans }))
 
+# The view of things that gets displayed on the front page
 def all(request):
+	# Should update this to sort by recent activity
 	recent_things = paginate(Thing.objects.all().order_by("-timestamp"), 20, request)
 	return render_to_response("thing/all.html", RequestContext(request, { 'thing_set': recent_things, }))
 
+# Search results view.
 def search(request):
 	query = request.REQUEST['query']
 	things = paginate(Thing.objects.filter(description__contains=query), 20, request)
 
 	return render_to_response("thing/search.html", RequestContext(request, { 'thing_set': things, 'query': query, }))
 
+# Map view.  Either for an individual thing or for things with the most recent activity.
 def map(request):
 	if request.REQUEST.has_key('id'):
 		t = Thing.objects.get(pk=int(request.REQUEST['id']))
@@ -39,6 +43,7 @@ def map(request):
 	else:
 		return render_to_response("thing/map.html", RequestContext(request, { }))
 
+# Produce a JSON list that is returned to the maps page to populate the map.
 def coords(request):
 	if request.REQUEST.has_key('id'):
 		scans = Scan.objects.filter	(	thing__pk=int(request.REQUEST['id']),
@@ -48,6 +53,7 @@ def coords(request):
 	else:
 		scans = Scan.objects.filter(latitude__isnull=False, longitude__isnull=False).order_by("-timestamp")[:20]
 
+	# TODO: Think about whether to factor this out into a template.
 	response = "["
 	for scan in scans:
 		response += "{ lat: %f, long: %f }, " % (scan.latitude, scan.longitude)

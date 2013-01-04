@@ -1,12 +1,19 @@
 <html>
-	<head><title>Object Tags</title></head>
+	<head>
+		<title>Object Tags</title>
+	</head>
 	<body style="margin:0px; text-align:center;">
-<table style="border-collapse:collapse;">
+<table>
 	{% for row in tags %}
 		<tr>
 		{% for item in row %}
-			<!--<td style="border:1px solid black; padding-top:2.5mm; padding-left:2.5mm; padding-bottom:7.5mm; padding-right:14.5mm;">-->
-			<td style="vertical-align:center; text-align:center; padding:3.0mm;">
+			{% if forloop.parentloop.first %}
+				<td style="padding-left:4.0mm; padding-right:4.0mm; padding-bottom:1.9mm; padding-top:0.0mm;">
+			{% elif forloop.parentloop.last %}
+				<td style="padding-left:4.0mm; padding-right:4.0mm; padding-bottom:0.0mm; padding-top:1.9mm;">
+			{% else %}
+				<td style="padding-left:4.0mm; padding-right:4.0mm; padding-bottom:1.9mm; padding-top:1.9mm;">
+			{% endif %}
 				<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://www.objectiverse.com/{{ item.private_id }}">
 			</td>
 		{% endfor %}

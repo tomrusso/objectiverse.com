@@ -7,7 +7,10 @@ urlpatterns = patterns('thing.views',
 	url(r'^create$', 'create_thing'),
 	url(r'^scan$', 'scan'),
 	url(r'^scan_update$', 'scan_update'),
+
+	# Figure out what to do with the next two -- they use GET parameters, so including $
+	# at the end doesn't work.
 	url(r'^search', 'search'),
-	url(r'^maps$', 'map'),
+	url(r'^maps', 'map'),
 	url(r'^coords', 'coords'),
 )
