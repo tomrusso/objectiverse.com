@@ -1,2 +1,5 @@
 # Ignore python compiled files
 *.pyc
+
+# Ignore swap files
+.*.sw?
