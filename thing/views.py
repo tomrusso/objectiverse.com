@@ -16,11 +16,11 @@ def thing(request, thing_id):
 
 # The private view of a thing which can only be accessed by those who scan the tag
 def thing_private(request, private_id, scan_id):
-	t = Tag.objects.get(private_id=private_id)
+	t = Tag.objects.get(private_id=private_id).thing
 	# TODO: At some point should make things per page a constant, see thing view above
 	scans = paginate(t.scan_set.all().order_by("-timestamp"), 20, request)
 	sf = ScanForm()
-	return render_to_response("thing/thing.html", RequestContext(request, { 't': t.thing, 'sf': sf, 'scan_id': scan_id, 'scans': scans }))
+	return render_to_response("thing/thing.html", RequestContext(request, { 't': t, 'sf': sf, 'scan_id': scan_id, 'scans': scans }))
 
 # The view of things that gets displayed on the front page
 def all(request):
